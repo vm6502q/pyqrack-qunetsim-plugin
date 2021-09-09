@@ -289,7 +289,7 @@ class PyQrackBackend(object):
             qubit(Qubit): Qubit to which the gate is applied.
             gate(np.ndarray): 2x2 array of the gate.
         """
-        self.engine.mtrx([gate[0].real, gate[0].imag, gate[1].real, gate[1].imag, gate[2].real, gate[2].imag, gate[3].real, gate[3].imag], qubit.qubit)
+        self.engine.mtrx(gate.flatten().tolist(), qubit.qubit)
 
     def custom_controlled_gate(self, qubit, target, gate):
         """
@@ -300,7 +300,7 @@ class PyQrackBackend(object):
             target(Qubit): Qubit on which the gate is applied.
             gate(nd.array): 2x2 array for the gate applied to target.
         """
-        self.engine.mcmtrx([qubit], [gate[0].real, gate[0].imag, gate[1].real, gate[1].imag, gate[2].real, gate[2].imag, gate[3].real, gate[3].imag], qubit.qubit)
+        self.engine.mcmtrx([qubit], gate.flatten().tolist(), qubit.qubit)
 
     def custom_two_qubit_gate(self, qubit1, qubit2, gate):
         """
